@@ -1,0 +1,132 @@
+{
+  "description": "JDK 8到JDK 21依赖版本映射表",
+  "last_updated": "2025-11-28",
+  "mappings": {
+    "spring_boot": {
+      "jdk8_version": "2.2.x - 2.7.x",
+      "jdk21_version": "3.2.4+",
+      "notes": "Spring Boot 3.x最低要求JDK 17"
+    },
+    "spring_cloud": {
+      "jdk8_version": "Hoxton - 2021.0.x",
+      "jdk21_version": "2023.0.1+",
+      "notes": "对应Spring Boot 3.2.x"
+    },
+    "lombok": {
+      "jdk8_version": "1.16.x - 1.18.12",
+      "jdk21_version": "1.18.36+",
+      "notes": "JDK 21兼容性，需要1.18.30+",
+      "critical": true
+    },
+    "mapstruct": {
+      "jdk8_version": "1.3.x - 1.4.x",
+      "jdk21_version": "1.5.5.Final",
+      "notes": "注解处理器兼容JDK 21",
+      "critical": true
+    },
+    "guava": {
+      "jdk8_version": "20.x - 30.x",
+      "jdk21_version": "33.2.1-jre",
+      "notes": "JDK 21优化版本"
+    },
+    "hutool": {
+      "jdk8_version": "5.3.x - 5.7.x",
+      "jdk21_version": "5.8.25+",
+      "notes": "JDK 17+兼容"
+    },
+    "commons_lang3": {
+      "jdk8_version": "3.8.x - 3.12.x",
+      "jdk21_version": "3.14.0+",
+      "notes": "增强JDK 21支持"
+    },
+    "jackson": {
+      "jdk8_version": "2.10.x - 2.13.x",
+      "jdk21_version": "2.16.1+",
+      "notes": "支持Jakarta EE"
+    },
+    "mybatis_plus": {
+      "jdk8_version": "3.3.2 - 3.4.x",
+      "jdk21_version": "3.5.5+",
+      "notes": "JDK 17+支持"
+    },
+    "mysql_connector": {
+      "jdk8_version": "8.0.x",
+      "jdk21_version": "8.3.0+",
+      "notes": "groupId改为com.mysql, artifactId改为mysql-connector-j"
+    },
+    "redisson": {
+      "jdk8_version": "3.11.x - 3.16.x",
+      "jdk21_version": "3.27.2+",
+      "notes": "JDK 17+优化"
+    },
+    "hibernate_validator": {
+      "jdk8_version": "6.x",
+      "jdk21_version": "8.0.1.Final",
+      "notes": "支持Jakarta Validation 3.0"
+    },
+    "fastjson2": {
+      "jdk8_version": "2.0.x",
+      "jdk21_version": "2.0.47+",
+      "notes": "推荐使用fastjson2替代fastjson"
+    },
+    "druid": {
+      "jdk8_version": "1.1.x - 1.2.8",
+      "jdk21_version": "1.2.21+",
+      "notes": "JDK 17+兼容"
+    },
+    "jedis": {
+      "jdk8_version": "3.x - 4.x",
+      "jdk21_version": "5.1.0+",
+      "notes": "JDK 17+优化"
+    },
+    "dubbo": {
+      "jdk8_version": "2.7.x",
+      "jdk21_version": "3.2.10+",
+      "notes": "Dubbo 3.x最低要求JDK 8，推荐JDK 17+"
+    }
+  },
+  "jakarta_ee": {
+    "servlet": {
+      "javax_version": "4.0.1",
+      "jakarta_version": "6.0.0",
+      "groupId_old": "javax.servlet",
+      "groupId_new": "jakarta.servlet",
+      "artifactId": "jakarta.servlet-api"
+    },
+    "validation": {
+      "javax_version": "2.0.1.Final",
+      "jakarta_version": "3.0.2",
+      "groupId_old": "javax.validation",
+      "groupId_new": "jakarta.validation",
+      "artifactId": "jakarta.validation-api"
+    },
+    "persistence": {
+      "javax_version": "2.2",
+      "jakarta_version": "3.1.0",
+      "groupId_old": "javax.persistence",
+      "groupId_new": "jakarta.persistence",
+      "artifactId": "jakarta.persistence-api"
+    },
+    "annotation": {
+      "javax_version": "1.3.2",
+      "jakarta_version": "2.1.1",
+      "groupId_old": "javax.annotation",
+      "groupId_new": "jakarta.annotation",
+      "artifactId": "jakarta.annotation-api"
+    }
+  },
+  "maven_plugins": {
+    "compiler": {
+      "recommended_version": "3.11.0+",
+      "notes": "完全支持JDK 21"
+    },
+    "surefire": {
+      "recommended_version": "3.2.5+",
+      "notes": "修复JDK 17+的测试问题"
+    },
+    "spring_boot_plugin": {
+      "recommended_version": "3.2.4+",
+      "notes": "对应Spring Boot版本"
+    }
+  }
+}

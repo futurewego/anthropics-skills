@@ -1,0 +1,132 @@
+{
+  "description": "javax到jakarta命名空间完整映射表",
+  "last_updated": "2025-11-28",
+  "package_mappings": {
+    "javax.servlet": "jakarta.servlet",
+    "javax.servlet.http": "jakarta.servlet.http",
+    "javax.servlet.jsp": "jakarta.servlet.jsp",
+    "javax.servlet.annotation": "jakarta.servlet.annotation",
+    "javax.persistence": "jakarta.persistence",
+    "javax.persistence.criteria": "jakarta.persistence.criteria",
+    "javax.persistence.metamodel": "jakarta.persistence.metamodel",
+    "javax.validation": "jakarta.validation",
+    "javax.validation.constraints": "jakarta.validation.constraints",
+    "javax.annotation": "jakarta.annotation",
+    "javax.annotation.security": "jakarta.annotation.security",
+    "javax.transaction": "jakarta.transaction",
+    "javax.websocket": "jakarta.websocket",
+    "javax.websocket.server": "jakarta.websocket.server",
+    "javax.ws.rs": "jakarta.ws.rs",
+    "javax.ws.rs.core": "jakarta.ws.rs.core",
+    "javax.ws.rs.client": "jakarta.ws.rs.client",
+    "javax.json": "jakarta.json",
+    "javax.json.bind": "jakarta.json.bind",
+    "javax.xml.bind": "jakarta.xml.bind",
+    "javax.xml.bind.annotation": "jakarta.xml.bind.annotation",
+    "javax.mail": "jakarta.mail",
+    "javax.activation": "jakarta.activation",
+    "javax.ejb": "jakarta.ejb",
+    "javax.jms": "jakarta.jms",
+    "javax.security.auth": "jakarta.security.auth",
+    "javax.security.enterprise": "jakarta.security.enterprise",
+    "javax.inject": "jakarta.inject",
+    "javax.interceptor": "jakarta.interceptor",
+    "javax.decorator": "jakarta.decorator",
+    "javax.el": "jakarta.el",
+    "javax.faces": "jakarta.faces"
+  },
+  "common_annotations": {
+    "@PostConstruct": {
+      "old": "javax.annotation.PostConstruct",
+      "new": "jakarta.annotation.PostConstruct"
+    },
+    "@PreDestroy": {
+      "old": "javax.annotation.PreDestroy",
+      "new": "jakarta.annotation.PreDestroy"
+    },
+    "@Resource": {
+      "old": "javax.annotation.Resource",
+      "new": "jakarta.annotation.Resource"
+    },
+    "@Valid": {
+      "old": "javax.validation.Valid",
+      "new": "jakarta.validation.Valid"
+    },
+    "@NotNull": {
+      "old": "javax.validation.constraints.NotNull",
+      "new": "jakarta.validation.constraints.NotNull"
+    },
+    "@Entity": {
+      "old": "javax.persistence.Entity",
+      "new": "jakarta.persistence.Entity"
+    },
+    "@Table": {
+      "old": "javax.persistence.Table",
+      "new": "jakarta.persistence.Table"
+    },
+    "@Id": {
+      "old": "javax.persistence.Id",
+      "new": "jakarta.persistence.Id"
+    },
+    "@Transactional": {
+      "old": "javax.transaction.Transactional",
+      "new": "jakarta.transaction.Transactional"
+    }
+  },
+  "servlet_classes": {
+    "HttpServlet": {
+      "old": "javax.servlet.http.HttpServlet",
+      "new": "jakarta.servlet.http.HttpServlet"
+    },
+    "HttpServletRequest": {
+      "old": "javax.servlet.http.HttpServletRequest",
+      "new": "jakarta.servlet.http.HttpServletRequest"
+    },
+    "HttpServletResponse": {
+      "old": "javax.servlet.http.HttpServletResponse",
+      "new": "jakarta.servlet.http.HttpServletResponse"
+    },
+    "ServletException": {
+      "old": "javax.servlet.ServletException",
+      "new": "jakarta.servlet.ServletException"
+    },
+    "Filter": {
+      "old": "javax.servlet.Filter",
+      "new": "jakarta.servlet.Filter"
+    }
+  },
+  "validation_constraints": {
+    "NotNull": "jakarta.validation.constraints.NotNull",
+    "NotEmpty": "jakarta.validation.constraints.NotEmpty",
+    "NotBlank": "jakarta.validation.constraints.NotBlank",
+    "Size": "jakarta.validation.constraints.Size",
+    "Min": "jakarta.validation.constraints.Min",
+    "Max": "jakarta.validation.constraints.Max",
+    "Email": "jakarta.validation.constraints.Email",
+    "Pattern": "jakarta.validation.constraints.Pattern"
+  },
+  "jpa_annotations": {
+    "Entity": "jakarta.persistence.Entity",
+    "Table": "jakarta.persistence.Table",
+    "Id": "jakarta.persistence.Id",
+    "GeneratedValue": "jakarta.persistence.GeneratedValue",
+    "Column": "jakarta.persistence.Column",
+    "ManyToOne": "jakarta.persistence.ManyToOne",
+    "OneToMany": "jakarta.persistence.OneToMany",
+    "JoinColumn": "jakarta.persistence.JoinColumn"
+  },
+  "migration_notes": {
+    "automatic": "大部分import语句可以通过脚本自动转换",
+    "manual_review": [
+      "配置文件中的类路径引用（如web.xml、persistence.xml）",
+      "字符串中的类名引用",
+      "反射代码中的类名",
+      "注解处理器配置"
+    ],
+    "common_issues": [
+      "混用javax和jakarta导致的类加载冲突",
+      "第三方库可能还在使用javax",
+      "需要确保所有依赖都已升级到Jakarta EE 9+兼容版本"
+    ]
+  }
+}

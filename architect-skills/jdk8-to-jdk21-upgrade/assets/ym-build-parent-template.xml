@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.ym</groupId>
+        <artifactId>ym-dependencies</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>ym-build-parent</artifactId>
+    <packaging>pom</packaging>
+
+    <name>YM Build Parent</name>
+    <description>企业级Maven构建配置父POM</description>
+
+    <!-- 引入BOM进行依赖版本管理 -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.ym</groupId>
+                <artifactId>ym-dependencies-bom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Maven Compiler Plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                        <release>${maven.compiler.release}</release>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <fork>true</fork>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                            <path>
+                                <groupId>org.mapstruct</groupId>
+                                <artifactId>mapstruct-processor</artifactId>
+                                <version>${mapstruct.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                        <compilerArgs>
+                            <!-- MapStruct 配置 -->
+                            <arg>-Amapstruct.suppressGeneratorTimestamp=true</arg>
+                            <arg>-Amapstruct.defaultComponentModel=spring</arg>
+                            <!--
+                                ⭐ 关键配置: JDK 21 模块强封装
+                                为注解处理器打开 javac 内部 API 访问权限
+                                Lombok 和 MapStruct 需要访问编译器内部 API
+                            -->
+                            <arg>--add-opens</arg>
+                            <arg>jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED</arg>
+                        </compilerArgs>
+                    </configuration>
+                </plugin>
+
+                <!-- Maven Surefire Plugin (单元测试) -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                    <configuration>
+                        <skipTests>false</skipTests>
+                        <testFailureIgnore>false</testFailureIgnore>
+                    </configuration>
+                </plugin>
+
+                <!-- Maven Failsafe Plugin (集成测试) -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${maven-failsafe-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Maven Source Plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${maven-source-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Maven Javadoc Plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven-javadoc-plugin.version}</version>
+                    <configuration>
+                        <encoding>UTF-8</encoding>
+                        <charset>UTF-8</charset>
+                        <docencoding>UTF-8</docencoding>
+                        <failOnError>false</failOnError>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Spring Boot Maven Plugin -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <excludes>
+                            <exclude>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                            </exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+
+                <!-- Maven Deploy Plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven-deploy-plugin.version}</version>
+                </plugin>
+
+                <!-- Maven Install Plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${maven-install-plugin.version}</version>
+                </plugin>
+
+                <!-- Maven Resources Plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources-plugin.version}</version>
+                    <configuration>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+
+                <!-- Maven Clean Plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${maven-clean-plugin.version}</version>
+                </plugin>
+
+                <!-- Maven JAR Plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
+                </plugin>
+
+                <!-- Maven WAR Plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${maven-war-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
